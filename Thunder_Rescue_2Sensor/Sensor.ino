@@ -117,8 +117,10 @@ void SerialPosition() {
 }
 
 //-------------------
-void getSensor(){
-ReadSensor();
-
-
+void readsensor(){
+L=analog10(4);
+R=analog10(5);
+oled.text(0,0,"L = %d", L);
+oled.text(1,0,"R = %d", R);
+oled.show();
 }

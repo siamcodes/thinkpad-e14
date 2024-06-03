@@ -6,17 +6,17 @@ void Find() {
       head_error = head_sp - x;
       dis_error = dis_sp - y;  //
       hI = hI + head_error;
-      dI = dI + dis_error;  //
+      dI = dI + dis_error;    //
       hI = constrain(hI, -MAX_Spd, MAX_Spd);
       dI = constrain(dI, -MAX_Spd, MAX_Spd);  //
       hD = head_error - hPrevError;
       dD = dis_error - dPrevError;  //
       head_spd = (head_Kp * head_error) + (hI * head_Ki) + (hD * head_Kd);
       dis_spd = (dis_Kp * dis_error) + (dI * dis_Ki) + (dD * dis_Kd);  //
-      //    int leftSpeed = constrain(-head_spd, -MAX_Spd, MAX_Spd);
-      //    int rightSpeed = constrain(head_spd, -MAX_Spd, MAX_Spd);
-      //    int leftSpeed = constrain(dis_spd, -MAX_Spd, MAX_Spd); //
-      //    int rightSpeed = constrain(dis_spd, -MAX_Spd, MAX_Spd); //
+      //int leftSpeed = constrain(-head_spd, -MAX_Spd, MAX_Spd);
+      //int rightSpeed = constrain(head_spd, -MAX_Spd, MAX_Spd);
+      //int leftSpeed = constrain(dis_spd, -MAX_Spd, MAX_Spd); //
+      //int rightSpeed = constrain(dis_spd, -MAX_Spd, MAX_Spd); //
 
       int leftSpeed = constrain(dis_spd - head_spd, -MAX_Spd, MAX_Spd);
       int rightSpeed = constrain(dis_spd + head_spd, -MAX_Spd, MAX_Spd);

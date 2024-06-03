@@ -1,8 +1,7 @@
-void Checkline() {
+void Checkline() {  //
   while (1) {
     ConvertADC();
     mission1();  //ครองบอล
-    //goal();  //วิ่งหาโกล
     if (C == 1) {
       holonomic(0, 0, 0);
       delay(500);
@@ -10,7 +9,7 @@ void Checkline() {
       while (1) {
         getIMU();
         heading(50, 270, 0);
-        if (millis() - loopTimer >= 4000) break;
+        if (millis() - loopTimer >= 2000) break;
       }
     }
     if (L == 1) {

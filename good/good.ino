@@ -33,7 +33,7 @@ float dis_error, dI, dD, dPrevError, dis_spd;
 
 const int h_gap = 10;
 const int d_gap = 10;
-//----------------------------------------------
+//-------------------
 void setup() {
   Speed = 20;
   SlowSpeed = 10;
