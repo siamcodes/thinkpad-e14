@@ -1,11 +1,11 @@
 void Check() {           //เจอสิ่งกีดขวางให้หลบ
   if (Dist < 18) {
     ao(); delay(100);
-    tr(50); delay(500);  
+    tr(50); delay(500);
     fd(50); delay(400);
-    Motor(20, 60); delay(800);
+    Move(20, 60, 800); 
     while (1) {
-      Motor(30, 60); delay(1);
+      Move(30, 60, 1);
       if (analog(1) <= 2000) {
         R90();
         break;
@@ -13,7 +13,6 @@ void Check() {           //เจอสิ่งกีดขวางให้�
     }
   }
 }
-
 //if (Dist < 20) {
 // sr(30);delay(400);fd(20);delay(1500);
 // sl(30);delay(300);fd(20);delay(1500);

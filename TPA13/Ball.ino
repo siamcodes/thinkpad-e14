@@ -2,7 +2,8 @@ void Ball() {    //ตามเก็บบอล
   fd(30);
 
   while ((pixy.updateBlocks() && pixy.sigSize[1]) || (pixy.updateBlocks() && pixy.sigSize[2]) || (pixy.updateBlocks() && pixy.sigSize[3])) {
-    ao(); delay(1);
+    ao(); 
+    delay(1);
     Find();
   }
 

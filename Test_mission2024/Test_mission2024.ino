@@ -109,6 +109,7 @@ void updateIMU() {
     getIMU();  // อย่าลืมว่าใช้ pvYaw เมื่อไหร่ ต้องอัพเดทค่าก่อนทุกครั้ง
   }
 }
+
 void wheel(int s1, int s2, int s3) {
   motor(1, s1);
   motor(2, s2);
@@ -170,10 +171,10 @@ void reload() {
 void setup() {
   //ShowADC();
   reload();
-  pixy.init();
-  Auto_zero();  // รีเซต zero อัตโนมัติ
+  pixy.iero();  // รีเซต zero อัตโนมัติ
   oled.text(4, 0, "SW_B => RUN");
-  oled.text(5, 0, "SW_A => Test Shoot");
+  oled.textnit();
+  Auto_z(5, 0, "SW_A => Test Shoot");
   while (!SW_B()) {
     getIMU();
     oled.text(0, 0, "Yaw=%f   ", pvYaw);

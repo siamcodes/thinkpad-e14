@@ -31,6 +31,7 @@ bool getIMU() {
 void setup() {
  zeroYaw();
 }
+
 void loop() {
   if (SW_A()) {
     zeroYaw();
