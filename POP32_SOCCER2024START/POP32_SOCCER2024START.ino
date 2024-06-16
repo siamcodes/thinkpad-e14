@@ -1,34 +1,39 @@
 #include <POP32.h>
 #include <POP32_Pixy2.h>
 POP32_Pixy2 pixy;
-
-int L, C, R;
-int RefL = 1000, RefC = 1000, RefR = 1000;
+////////////////////////////////////////
+#define numsensor 3
+int Max[numsensor] = { 900, 900, 900 };
+int Min[numsensor] = { 0, 0, 0 };
+unsigned long s[numsensor];
+int last_value = 0;
 unsigned long loopTimer = millis();
-
+///////////////////////////////////////
 #define degToRad 0.0174f
 #define sin30 sin(30.f * degToRad)
 #define cos30 cos(30.f * degToRad)
 // ค่าที่ใช้ปรับหุ่นให้เข้าด้านหน้าตรงลูกบอล
-#define rot_Kp 0.7  //0.35
-#define rot_Ki 0.0
-#define rot_Kd 0.0       //0
+#define rot_Kp 0.5      // 0.35
+#define rot_Ki 0.0       // 0.0
+#define rot_Kd 0.24      // 0.0
 #define sp_rot 160       // ค่า setpoint ที่ลูกบอลอยู่ตรงกลางกล้องแกน x  320/2 = 160
 float rotErrorGap = 15;  // ค่า Error ที่ยอมให้หุ่นหยุดทำงาน
-#define idleSpd 35       // ค่าความเร็วการหมุนเมื่อไม่เจอลูกบอล
+#define idleSpd 40       // ค่าความเร็วการหมุนเมื่อไม่เจอลูกบอล
 float rot_error, rot_pError, rot_i, rot_d, rot_w;
 int ballPosX;
 // ค่าที่ใช้ปรับหุ่นให้เข้าใกล้ลูกบอล
-#define fli_Kp 1.5
+#define fli_Kp 1.5  //1.2
 #define fli_Ki 0.0
-#define fli_Kd 0.0
+#define fli_Kd 0.1        //0.0
 float flingErrorGap = 15;  // ค่า Error ที่ยอมให้หุ่นหยุดทำงาน
 float spFli = 170;         //170    // ค่า setpoint ที่ยอมให้ลูกบอลอยู่ใกล้หุ่นมากที่สุด อาจเริ่มที่จุดกลางจอ แกน Y
 float fli_error, fli_pError, fli_i, fli_d, fli_spd;
 int ballPosY;
+int goalPosY;
+int goalPosX;
 // ค่าที่ใช้ปรับหุ่นให้ตรงทิศอ้างอิง
-#define ali_Kp 2.75
-#define ali_Kd 0.0
+#define ali_Kp 2.4
+#define ali_Kd 0.1
 #define alignErrorGap 4
 float ali_error, ali_pError, ali_d, ali_vec, vecCurve, radCurve;
 int discoveState = 1;
@@ -38,8 +43,8 @@ int discoveState = 1;
 #define head_Kd 0.5f
 float head_error, head_pError, head_w, head_d, head_i;
 /* >> ball shooting <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< */
-#define limPin A0
-#define reloadSpd 70
+#define limPin A8  //A0
+#define reloadSpd 70  //70
 float thetaRad, vx, vy, spd1, spd2, spd3;
 
 void zeroYaw() {
@@ -93,7 +98,7 @@ void Auto_zero() {
     if (getIMU()) {
       oled.text(3, 6, "Yaw: %f  ", pvYaw);
       oled.show();
-      //beep();
+      beep();
       if (millis() - timerOut > 5000) {
         zeroYaw();
         timerOut = millis();
@@ -169,12 +174,11 @@ void reload() {
 }
 
 void setup() {
-  //ShowADC();
+  Auto_zero();  // รีเซต zero อัตโนมัติ
   reload();
-  pixy.iero();  // รีเซต zero อัตโนมัติ
+  pixy.init();
   oled.text(4, 0, "SW_B => RUN");
-  oled.textnit();
-  Auto_z(5, 0, "SW_A => Test Shoot");
+  oled.text(5, 0, "SW_A => Test Shoot");
   while (!SW_B()) {
     getIMU();
     oled.text(0, 0, "Yaw=%f   ", pvYaw);
@@ -185,10 +189,12 @@ void setup() {
       reload();
     }
   }
+  //oled.clear();
+  //view();       //ดูเซ็นเซอร์
+  //viewRead();
 }
 
 void loop() {
   //mission1();
-  CheckLine();
-
+ Play();
 }

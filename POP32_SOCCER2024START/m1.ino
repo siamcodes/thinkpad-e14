@@ -1,4 +1,4 @@
-void mission2() {
+void mission1() {
   if (pixy.updateBlocks() && pixy.sigSize[1]) {
     ballPosX = pixy.sigInfo[1][0].x;
     ballPosY = pixy.sigInfo[1][0].y;
@@ -27,13 +27,11 @@ void mission2() {
         discoveState = 0;
         lastYaw = pvYaw;
       }
-
     } else {  //จะทำงานเมื่อเจอลูกบอลแต่ทิศไม่ตรงที่จะยิ่ง
       ali_error = ballPosY - spFli;
       ali_d = ali_error - ali_pError;
       ali_vec = ali_error * ali_Kp + ali_d * ali_Kd;
       ali_pError = ali_error;
-
       // หุ่นเลือกทิศทางที่ใกล้ที่สุด ที่จะปรับท้ายหุ่นหาลูกบอล
       if (lastYaw < 0) {
         vecCurve = -ali_vec;
@@ -43,36 +41,39 @@ void mission2() {
         radCurve = -15;
       }
       holonomic(40, vecCurve, radCurve);
-      updateIMU();                       //อัพเดทค่า IMU ก่อนทุกครั้ง
+      updateIMU();  //อัพเดทค่า IMU ก่อนทุกครั้ง
+
       if (abs(pvYaw) < alignErrorGap) {  //เมื่อทิศอยู่ในค่าที่รับได้
         rot_error = sp_rot - ballPosX;   //คำนวนหาค่า Error ว่าลูกบอลอยู่ตรงกลางหรือไม่
         discoveState = 1;
-        goalYellow();                              //หาประตู
         if (abs(rot_error) < rotErrorGap) {  //ถ้าลูกบอลอยู่ตรงกลางให้ทำการยิง
+        //Goal();   //วิ่งหาประตู เข้าไปยิง
           unsigned long loopTimer = millis();
           while (1) {  //เดินหน้าตรงความเร็ว 100%
             getIMU();
-            heading(70, 90, 0);                      //เดินหน้า
-            if (millis() - loopTimer >= 700) break;  //250
+            //Goal();   //วิ่งหาประตู เข้าไปยิง
+            heading(100, 90, 0);       //เดินหน้าเข้าไปยิง
+            if (millis() - loopTimer >= 250) break;  //250
           }
 
           shoot();  //ยิง
           beep(1);
-          //delay(2000);
+          delay(200);
           reload();  //เก็บก้านยิง
           discoveState = 1;
-          //-------------------
-          while (1) {
+          //-------------------------------
+          /*
+          while (1) {  //ถอยมาหยุดที่ฝั่งตนเอง
             getIMU();
-            heading(60, 270, 0);  //ุถอย
+            heading(100, 270, 0);  //ุถอย
             //if (millis() - loopTimer >= 2000) break;  //ออก
-            ConvertADC();
-            if ((L == 1) || (R == 1)) {
-              break;
-            }
+            ReadLine();
+            if (s[0] < 500 || s[2] < 500 || (millis() - loopTimer >= 5000)){ break; }  //ถอยจนกว่าเซ็นเซอร์ซ้าย-ขวาเจอเส้นขาวหรือจะหมดเวลา
           }
-          //-------------------
-          
+          //-------------------------------
+          holonomic(80, 90, 0);  //เดินหน้านิดหนึ่ง
+          delay(500);
+          */
         }
       }
     }

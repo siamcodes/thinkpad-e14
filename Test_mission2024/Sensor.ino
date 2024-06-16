@@ -14,8 +14,8 @@ void ShowADC() {
 
 void ConvertADC() {
   ReadADC();  //ขาวมาก=1  เขียวน้อย=0
-  if (L > RefL) L = 1; else L = 0;
-  if (C > RefC) C = 1; else C = 0;
-  if (R > RefR) R = 1; else R = 0;
+  if (L > RefL) L = 0; else L = 1;
+  if (C > RefC) C = 0; else C = 1;
+  if (R > RefR) R = 0; else R = 1;
 }
 

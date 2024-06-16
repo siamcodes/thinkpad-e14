@@ -52,7 +52,7 @@ void mission1(){
           while (1) {  //เดินหน้าตรงความเร็ว 100%
             getIMU();
             heading(80,90, 0);
-            if (millis() - loopTimer >= 1500) break;  //250
+            if (millis() - loopTimer >= 1000) break;  //250
           }
           shoot();   //ยิง
           beep();
