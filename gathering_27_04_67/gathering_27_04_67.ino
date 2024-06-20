@@ -41,10 +41,10 @@ Servo myservo[3];
 
 #define numsensor 8
 int last_value = 0;
-int MaxF[numsensor] = { 875,	880,	813,	849,	858,	774,	869,	600 };
+int MaxF[numsensor] = {971,	974,	914,	927,	903,	862,	966,	672 };
 int MinF[numsensor] = { 341,	380,	267,	262,	256,	240,	284,	217 };
-int MaxB[numsensor] = { 864,	860,	742,	755,	870,	799,	774,	705 };
-int MinB[numsensor] = { 296,	288,	240,	236,	328,	238,	247,	256 };
+int MaxB[numsensor] = { 968,	963,	876,	860,	970,	818,	888,	812  };
+int MinB[numsensor] = { 182,	189,	122,	133,	159,	124,	157,	115 };
 
 int Boxtime[10] = { 0, 150, 300, 480, 650 };
 unsigned long F[numsensor];
@@ -62,7 +62,7 @@ void setup() {
   pinMode(pwmB, OUTPUT);
 
   // view(BACKSENSOR);
-  // viewRead();
+   //viewRead(FRONTSENSOR);
   // viewReadLine(FRONTSENSOR);
   // ReadLine(FRONTSENSOR);
   servo(1, closeL);
@@ -84,24 +84,27 @@ void setup() {
   // run(6, 1, R, FRONTSENSOR, N);
   // kt(20,200);
   cube1();
-  cube2();
-  cube3();
-  cube4();
-  cube5();
-  cube6();
+  //cube2();
+  //cube3();
+  //cube4();
+  //cube5();
+  //cube6();
   motor(0, 0);
 }
 
 void loop() {
   Serial.println(digitalRead(8));
 }
+
 void stop(int Timer) {
   Move(0, 0, Timer);
 }
+
 void Move(int spl, int spr, int Timer) {
   motor(spl, spr);
   delay(Timer);
 }
+
 void motor(int motorl, int motorr) {
   motorl = (motorl * 255) / 100;
   motorr = (motorr * 255) / 100;
@@ -118,6 +121,7 @@ void motor(int motorl, int motorr) {
     digitalWrite(dir2A, HIGH);
     analogWrite(pwmA, -motorl);
   }
+  
   if (motorr == 0) {
     digitalWrite(dir1B, HIGH);
     digitalWrite(dir2B, HIGH);
@@ -220,6 +224,7 @@ int ReadLine(int Sensor) {
     return last_value;
   }
 }
+
 void viewReadLine(int Sensor) {
   while (true) {
     if (Sensor == FRONTSENSOR) {
@@ -265,7 +270,6 @@ void k2(int timer) {
   servo(2, closeR);
   stop(150);
 }
-
 
 void kt(int timer, int ttimer) {
   stop(timer);

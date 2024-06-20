@@ -95,19 +95,20 @@
 //   Move(-50,-50,250);
 //   l();
 void cube1() {
-  run(1, 2, R, FRONTSENSOR, R);
-  servo(1, openL);
-  servo(2, openR);
-  servo(3, down);
-  tt(70, 0.015, 0.15, 400, FRONTSENSOR);
-  tt(40, 0.015, 0.15, 250, FRONTSENSOR);
-  servo(1, closeL);
-  servo(2, closeR);
-  run(1, 2, R, FRONTSENSOR, R);
-  run(2, 2, R, FRONTSENSOR, R);
-  run(4, 1, L, FRONTSENSOR, N);
-  drop(LS, 250);
+  //run(1, 1, R, FRONTSENSOR, R);
+  //servo(1, openL);
+  //servo(2, openR);
+  //servo(3, down);
+  tt(30, 0.015, 0.15, 400, FRONTSENSOR);
+  //tt(40, 0.015, 0.15, 250, FRONTSENSOR);
+  //servo(1, closeL);
+  //servo(2, closeR);
+  //run(1, 2, R, FRONTSENSOR, R);
+  //run(2, 2, R, FRONTSENSOR, R);
+  //run(4, 1, L, FRONTSENSOR, N);
+  //drop(LS, 250);
 }
+/*
 void cube2() {
   tr(-50, 0.015, 0.15, BACKSENSOR);
   l();
@@ -250,3 +251,4 @@ void cube6() {
   run(1, 2, LR, FRONTSENSOR, N);
   Move(50,50,100);
 }
+*/

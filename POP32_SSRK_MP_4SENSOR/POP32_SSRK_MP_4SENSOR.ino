@@ -25,7 +25,7 @@ void loop() {
   //TrackCount(20,0.05,0.05);
   //TrackNormal(30,0.05,0.11);
   //TrackNormal(40,0.09,2.17);
-  TrackNormal(0,0.13,1.05);
+  TrackNormal(0,0.07,0.05);
 }
 
 void TrackCount(int line, int direc, int spin) {

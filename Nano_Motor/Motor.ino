@@ -6,14 +6,14 @@ void MotorStop(){
    delay(10);
 }
 
-void Forward(int MotorSpeed, int Time){
+void Forward(int MotorSpeed){
    analogWrite(AIN1, MotorSpeed);
    analogWrite(AIN2, 0);
    analogWrite(BIN1, MotorSpeed);
    analogWrite(BIN2, 0);
 }
 
-void Backward(int MotorSpeed, int Time){
+void Backward(int MotorSpeed){
    analogWrite(AIN1, 0);
    analogWrite(AIN2, MotorSpeed);
    analogWrite(BIN1, 0);
