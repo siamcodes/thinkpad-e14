@@ -23,7 +23,7 @@ typedef uint8_t SPIClass;
     defined(ARDUINO_AVR_ATmega3208) || defined(ARDUINO_AVR_ATmega1609) ||      \
     defined(ARDUINO_AVR_ATmega1608) || defined(ARDUINO_AVR_ATmega809) ||       \
     defined(ARDUINO_AVR_ATmega808) || defined(ARDUINO_ARCH_ARC32) ||           \
-    defined(ARDUINO_ARCH_XMC)
+    defined(ARDUINO_ARCH_XMC) || defined(ARDUINO_SILABS)
 
 typedef enum _BitOrder {
   SPI_BITORDER_MSBFIRST = MSBFIRST,
@@ -74,8 +74,7 @@ typedef uint32_t BusIO_PortMask;
 
 #elif (defined(__arm__) || defined(ARDUINO_FEATHER52)) &&                      \
     !defined(ARDUINO_ARCH_MBED) && !defined(ARDUINO_ARCH_RP2040) &&            \
-    !defined(ARDUINO_SILABS) && !defined(ARDUINO_UNOR4_MINIMA) &&              \
-    !defined(ARDUINO_UNOR4_WIFI)
+    !defined(ARDUINO_SILABS)
 typedef volatile uint32_t BusIO_PortReg;
 typedef uint32_t BusIO_PortMask;
 #if !defined(__ASR6501__) && !defined(__ASR6502__)

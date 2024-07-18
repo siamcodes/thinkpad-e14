@@ -1,7 +1,7 @@
 void ReadSensor() {  //ค่าดิบ
   for (int _sensor = 0; _sensor < NUM_SENSORS; _sensor++) {
   //adc.begin(sck, mosi, miso, ssf);
-//    adc.begin(25, 26, 27, 24);
+//  adc.begin(25, 26, 27, 24);
     F[_sensor] = analog10(F_PIN[_sensor]);
   }
 }

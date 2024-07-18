@@ -55,10 +55,12 @@ void setup() {
 void loop() {
   Serial.println(digitalRead(8));
 }
+
 void Move(int spl, int spr, int Timer) {
   motor(spl, spr);
   delay(Timer);
 }
+
 void motor(int motorl, int motorr) {
   motorl = (motorl * 255) / 100;
   motorr = (motorr * 255) / 100;
@@ -99,6 +101,7 @@ void view() {
     Serial.println("");
   }
 }
+
 void Read() {
   int x = 0;
   for (int i = 0; i < numsensor; i++) {
@@ -108,6 +111,7 @@ void Read() {
     F[i] = x;
   }
 }
+
 void viewRead() {
   while (true) {
     Read();
@@ -139,6 +143,7 @@ int ReadLine() {
   }
   return last_value;
 }
+
 void viewReadLine() {
   while (true) {
     for (int i = 0; i < 8; i++) {

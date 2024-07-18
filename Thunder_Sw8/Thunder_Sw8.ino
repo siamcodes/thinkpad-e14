@@ -12,17 +12,15 @@ int MaxValue[NUM_SENSORS] = {527,535,606,621,610,613,699,473};
 int REF[NUM_SENSORS] = {342,336,379,378,374,376,439,299};
 ///////////////////////////////////////////////////////////////////////////
 
-
 void setup() {
   Serial.begin(9600);
   //AutoRef();
   beep();
   sw_OK_press(); // Wait For Press SW
   delay(500);
-//ShowCalibrate(); //Calibrate Light of Sensor
+  //ShowCalibrate(); //Calibrate Light of Sensor
   //SerialF(); //Serial Sensor
   //Program1();
-  
   
 }
 

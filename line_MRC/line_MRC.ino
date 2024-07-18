@@ -22,7 +22,7 @@ void setup() {
   pinMode(dir2B, OUTPUT);
   pinMode(pwmB, OUTPUT);
   adc.begin(A0, A1, A2, A3);
-  // view();
+  view();
   // viewRead();
   // viewReadLine();
   // t(50,0.007,0.1);  //YR kd 0.1
@@ -30,7 +30,7 @@ void setup() {
   // t(45,0.009,0.078);  //U
   // SENSOR 0.8 c.m.
 
-  //  t(50,0.007,0.1);
+  // t(50,0.007,0.1);
   // t(45,0.012,0.05);   //s_cycle
   // tt(50,0.007,0.07,550);
 
@@ -53,7 +53,7 @@ void setup() {
 }
 
 void loop() {
-  Serial.println(digitalRead(8));
+  //Serial.println(digitalRead(8));
 }
 void Move(int spl, int spr, int Timer) {
   motor(spl, spr);

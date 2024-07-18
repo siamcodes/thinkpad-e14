@@ -62,8 +62,8 @@ void setup() {
   pinMode(pwmB, OUTPUT);
 
   // view(BACKSENSOR);
-   //viewRead(FRONTSENSOR);
-  // viewReadLine(FRONTSENSOR);
+  // viewRead(FRONTSENSOR);
+   viewReadLine(FRONTSENSOR);
   // ReadLine(FRONTSENSOR);
   servo(1, closeL);
   servo(2, closeR);
@@ -83,17 +83,19 @@ void setup() {
   // tt(70, 0.015, 0.15, 350, BACKSENSOR);
   // run(6, 1, R, FRONTSENSOR, N);
   // kt(20,200);
-  cube1();
+  //cube1();
   //cube2();
   //cube3();
   //cube4();
   //cube5();
   //cube6();
-  motor(0, 0);
+  //motor(0, 0);
 }
 
 void loop() {
+
   Serial.println(digitalRead(8));
+  tn(20, 0.022, 0.42, FRONTSENSOR);
 }
 
 void stop(int Timer) {
