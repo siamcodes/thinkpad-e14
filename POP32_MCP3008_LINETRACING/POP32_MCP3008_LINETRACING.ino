@@ -12,8 +12,8 @@ MCP3008 adc;
 #define R 112
 #define ALL 113
 #define N 114
-int Max[numsensor] = { 566,	527,	491,	416,	500,	587,	557,	467};
-int Min[numsensor] = { 47,	47,	44,	41,	42,	45,	44,	45 };
+int Max[numsensor] = {826,	792,	768,	760,	783,	765,	743,	822};
+int Min[numsensor] = { 171,	62,	60,	53,	64,	52,	57,	118};
 unsigned long s[numsensor];
 int error, Last_Error, Integral, leftmotor, rightmotor, PowerMotor, Position;
 int last_value = 0;
@@ -36,7 +36,7 @@ void setup() {
 }
 
 void loop() {
-  TrackPID(20, 0.03, 0.03);
+  TrackPID(0, 0.02, 0.03);
   //TrackPID(20, 0.03, 0.03);
   //TrackPID(40, 0.03, 0.07);
   //m1();
