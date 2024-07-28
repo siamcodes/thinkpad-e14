@@ -32,11 +32,11 @@ void setup() {
   //Grip();
   //Move(20,20,1000);
   //END();
-  //view();
+  view();
 }
 
 void loop() {
-  TrackPID(0, 0.02, 0.03);
+  //TrackPID(0, 0.02, 0.03);
   //TrackPID(20, 0.03, 0.03);
   //TrackPID(40, 0.03, 0.07);
   //m1();
