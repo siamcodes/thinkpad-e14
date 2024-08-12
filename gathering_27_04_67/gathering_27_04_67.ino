@@ -41,8 +41,8 @@ Servo myservo[3];
 
 #define numsensor 8
 int last_value = 0;
-int MaxF[numsensor] = {971,	974,	914,	927,	903,	862,	966,	672 };
-int MinF[numsensor] = { 341,	380,	267,	262,	256,	240,	284,	217 };
+int MaxF[numsensor] = {871,	876,	897,	855,	802,	883,	865,	655 };
+int MinF[numsensor] = { 243,	252,	236,	238,	238,	189,	249,	184 };
 int MaxB[numsensor] = { 968,	963,	876,	860,	970,	818,	888,	812  };
 int MinB[numsensor] = { 182,	189,	122,	133,	159,	124,	157,	115 };
 
@@ -61,24 +61,24 @@ void setup() {
   pinMode(dir2B, OUTPUT);
   pinMode(pwmB, OUTPUT);
 
-  // view(BACKSENSOR);
+   //view(FRONTSENSOR);
   // viewRead(FRONTSENSOR);
-   viewReadLine(FRONTSENSOR);
+   //viewReadLine(FRONTSENSOR);
   // ReadLine(FRONTSENSOR);
   servo(1, closeL);
   servo(2, closeR);
   servo(3, up);
   sentor = 3350;
-  while (analogRead(A6) > 500)
-    ;
+  while (analogRead(A6) > 500);
   delay(200);
   // servo(1, openL);
   // servo(2, openR);
   // servo(3, down);
   // run(4, 1, LR, FRONTSENSOR, N);
   // k(200);
-  // tlr(100, 0.022, 0.22, FRONTSENSOR);
-  // run(1, 1, LR, FRONTSENSOR, R);
+  //Move(50,50,10000);
+   //tlr(50, 0.022, 0.22, FRONTSENSOR);
+   run(1, 1, LR, FRONTSENSOR, N);
   // tt(95, 0.022, 0.42, 1950, FRONTSENSOR);
   // tt(70, 0.015, 0.15, 350, BACKSENSOR);
   // run(6, 1, R, FRONTSENSOR, N);
@@ -89,13 +89,12 @@ void setup() {
   //cube4();
   //cube5();
   //cube6();
-  //motor(0, 0);
+  motor(0, 0);
 }
 
 void loop() {
-
   Serial.println(digitalRead(8));
-  tn(20, 0.022, 0.42, FRONTSENSOR);
+  //tn(20, 0.022, 0.42, FRONTSENSOR);
 }
 
 void stop(int Timer) {
@@ -142,11 +141,11 @@ void motor(int motorl, int motorr) {
 void view(int Sensor) {
   while (true) {
     if (Sensor == FRONTSENSOR) {
-      adc.begin(A0, A2, A1, 8);
-      adc.begin(A0, A2, A1, A3);
+      adc.begin(A0, A2, A1, 8);   //sck, mosi, miso, cs
+      adc.begin(A0, A2, A1, A3);  //sck, mosi, miso, cs
     } else if (Sensor == BACKSENSOR) {
-      adc.begin(A0, A2, A1, A3);
-      adc.begin(A0, A2, A1, 8);
+      adc.begin(A0, A2, A1, A3);  //sck, mosi, miso, cs
+      adc.begin(A0, A2, A1, 8);   //sck, mosi, miso, cs
     }
     for (int i = 0; i < 8; i++) {
       Serial.print(adc.readADC(i));

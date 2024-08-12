@@ -11,6 +11,12 @@
 
 #include "Arduino.h"
 
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <OLED_I2C_SSD1309.h>
+OLED_I2C_SSD1309 oled(-1);
+
+
 #define sleep(x) delay(x)
 #define delay_us(x) delayMicroseconds(x)
 
@@ -46,14 +52,41 @@ Servo myServo[sizeof(servo_pins)];
 
 volatile int __analogResolution = 10;
 
+enum {
+  _A0 = 100,
+  _A1,
+  _A2,
+  _A3,
+  _A4,
+  _A5,
+  _A6,
+  _A7,
+  _A8,
+  _A9
+};
 
 //-------------------------------------------------------------
 // Digital in,out
 //-------------------------------------------------------------
+#define LOGIC_HIGH_THRESHOLD (200)
+int analog(int pinAN);
+
 int in(int p) {
-  pinMode(p, INPUT_PULLUP);
-  return digitalRead(p);
+  if (p < _A0) {
+    pinMode(p, INPUT_PULLUP);
+    return digitalRead(p);
+  } else if (p >= _A0 && p <= _A7) {
+    uint8_t analog_pin = p - _A0;
+    int a = analog(analog_pin);
+    int logic = a > LOGIC_HIGH_THRESHOLD;
+    // Serial.printf("[A%d] Analog: %4d, logic: %d\t", analog_pin, a, logic);
+    return logic;
+  } else {
+    pinMode(p - _A8 + A1, INPUT_PULLUP);
+    return digitalRead(p - _A8 + A1);
+  }
 }
+
 void out(int p, int dat) {
   pinMode(p, OUTPUT);
   digitalWrite(p, dat);
@@ -69,8 +102,6 @@ void out(int p, int dat) {
 #define ANALOG_MUX_S0_PIN (12)
 #define ANALOG_MUX_S1_PIN (11)
 #define ANALOG_MUX_S2_PIN (10)
-
-int analog(int pinAN);
 
 int analog(void)  // return 10 or 12 as resolution mode
 {
@@ -185,7 +216,7 @@ int SW_OK(void) {
   if (__analogResolution == 12) {
     return analogRead(A3) < 20;
   } else {
-    return analogRead(A3) <= 4;
+    return analogRead(A3) <= 8;
   }
 
   return 0;
