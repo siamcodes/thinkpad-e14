@@ -61,7 +61,7 @@ void setup() {
   pinMode(dir2B, OUTPUT);
   pinMode(pwmB, OUTPUT);
 
-  // view(FRONTSENSOR);  //อ่านค่าเซนเซอร์
+   view(FRONTSENSOR);  //อ่านค่าเซนเซอร์
   // viewRead();
   // viewReadLine(FRONTSENSOR);
   // ReadLine(FRONTSENSOR);
@@ -83,13 +83,16 @@ void setup() {
   // tt(70, 0.015, 0.15, 350, BACKSENSOR);
   // run(6, 1, R, FRONTSENSOR, N);
   // kt(20,200);
-  cube1();
-  cube2();
-  cube3();
-  cube4();
-  cube5();
-  cube6();
+  //cube1();
+  //cube2();
+  //cube3();
+  //cube4();
+  //cube5();
+  //cube6();
+  Move(100,100,5000);
   motor(0, 0);
+  
+
 }
 
 void loop() {

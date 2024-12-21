@@ -3,30 +3,25 @@ Adafruit_MCP3008 adc;  //
 #define FRONTSENSOR 999
 #define BACKSENSOR 998
 #define numsensor 8
-int MaxF[numsensor] = { 877,	873,	843,	857,	862,	879,	873,	630 };  //MexF-100
-int MinF[numsensor] = { 372,	404,	305,	256,	276,	230,	266,	219 };  //MinF+100
-int MaxB[numsensor] = { 872,	867,	793,	795,	870,	725,	807,	746 };  //MexB-100
-int MinB[numsensor] = { 302,	321,	283,	245,	308,	218,	248,	237 };  //MinB-100
+int MaxF[numsensor] = { 877, 873, 843, 857, 862, 879, 873, 630 };  //MexF-100
+int MinF[numsensor] = { 372, 404, 305, 256, 276, 230, 266, 219 };  //MinF+100
+int MaxB[numsensor] = { 872, 867, 793, 795, 870, 725, 807, 746 };  //MexB-100
+int MinB[numsensor] = { 302, 321, 283, 245, 308, 218, 248, 237 };  //MinB-100
 unsigned long F[numsensor];
 unsigned long B[numsensor];
 
 void setup() {
-Serial.begin(9600);
-
-
-
+  Serial.begin(9600);
 }
 
 void loop() {
- view(BACKSENSOR);
-
+  view(BACKSENSOR);
 }
-
 
 void view(int Sensor) {
   while (true) {
     if (Sensor == FRONTSENSOR) {
-      adc.begin(A0, A2, A1, 8);
+      adc.begin(A0, A2, A1, 8); 
       adc.begin(A0, A2, A1, A3);
     } else if (Sensor == BACKSENSOR) {
       adc.begin(A0, A2, A1, A3);
